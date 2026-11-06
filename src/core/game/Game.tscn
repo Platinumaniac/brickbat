@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ds424mi8d3m1k" path="res://src/core/game/game.gd" id="1_cky5y"]
 [ext_resource type="Script" uid="uid://db226hv2volbb" path="res://src/core/systems/navigation.gd" id="2_22ngx"]
+[ext_resource type="AudioStream" uid="uid://cg4dlilkxylh" path="res://audio/Music/BB_Construction Jam 2026_Main Theme_V1.mp3" id="3_jfb2m"]
 
 [node name="Game" type="Node" unique_id=1707179465]
 script = ExtResource("1_cky5y")
@@ -20,3 +21,8 @@ unique_name_in_owner = true
 
 [node name="StageRoot" type="Node2D" parent="World" unique_id=1848741826]
 unique_name_in_owner = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1316681699]
+stream = ExtResource("3_jfb2m")
+autoplay = true
+parameters/looping = true

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dmdn7c632ktnw" path="res://src/gameplay/stage/stage.gd" id="1_osl5s"]
 [ext_resource type="Script" uid="uid://cffhngadtopdq" path="res://src/gameplay/stage/camera_2d.gd" id="3_xoyka"]
 [ext_resource type="PackedScene" uid="uid://dyyle1tiitayn" path="res://src/gameplay/building/Building.tscn" id="4_3faw4"]
+[ext_resource type="PackedScene" uid="uid://ccs8plbfjd4mj" path="res://src/gameplay/enemy/Enemy.tscn" id="5_3faw4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofpdg"]
 texture = ExtResource("1_i3rf1")
@@ -157,3 +158,6 @@ metadata/_custom_type_script = "uid://cffhngadtopdq"
 
 [node name="Building" parent="." unique_id=704800898 instance=ExtResource("4_3faw4")]
 position = Vector2(0, 112)
+
+[node name="Enemy" parent="." unique_id=423329651 instance=ExtResource("5_3faw4")]
+position = Vector2(-301, 130)

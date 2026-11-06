@@ -34,6 +34,10 @@ func get_throw_velocity() -> Vector2:
 	var centered_mouse_position: Vector2 = _mouse_position - viewport_rect.size / 2
 	return (centered_mouse_position - global_position).normalized() * _throw_speed
 
+func play_footstep() -> void:
+	$FootstepAudio.stop()
+	$FootstepAudio.play()
+
 func _physics_process(delta: float) -> void:
 	var move_input = Input.get_axis("move_left", "move_right")
 

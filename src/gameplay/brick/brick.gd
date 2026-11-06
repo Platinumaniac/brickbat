@@ -1,6 +1,10 @@
 extends Area2D
 class_name Brick
 
+@export var enemy_hit: AudioStreamRandomizer
+@export var ground_hit: AudioStreamRandomizer
+@export var building_hit: AudioStreamRandomizer
+
 ## how good the brick is at building and killing
 @export var power: float = 10
 
@@ -23,18 +27,40 @@ func _physics_process(delta: float) -> void:
 
 ## called when brick is broken
 func _shatter() -> void:
+	set_physics_process(false)
+	set_deferred("monitoring", false)
+	hide()
+	await %BrickHitAudio.finished
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Stage:
 		get_tree().call_group("shake_camera", "add_trauma", 0.4)
+		play_hit_sound("ground")
 		_shatter()
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Building:
 		area.build(power)
 		get_tree().call_group("shake_camera", "add_trauma", 0.5)
-		queue_free()
+		play_hit_sound("building")
+		_shatter()
 	elif area is Enemy:
 		area.attack(power)
-		queue_free()
+		play_hit_sound("enemy")
+		_shatter()
+
+func play_hit_sound(target_type: String) -> void:
+	%BrickHitAudio.stop() 
+	
+	match target_type:
+		"enemy":
+			%BrickHitAudio.stream = enemy_hit
+		"ground":
+			%BrickHitAudio.stream = ground_hit
+		"building":
+			%BrickHitAudio.stream = building_hit
+		_:
+			push_warning("Hit sound not found for: " + target_type)
+			return
+	%BrickHitAudio.play()

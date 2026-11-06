@@ -63,7 +63,8 @@ func start_quota() -> void:
 	_update_progress_label()
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("q"):
+	if !_quota_running and Input.is_action_just_pressed("q"):
+		$AudioStreamPlayer2D.play()
 		start_quota()
 
 	if not _quota_running:
