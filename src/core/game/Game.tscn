@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c2spurn3pjjdm"]
+
+[ext_resource type="Script" uid="uid://ds424mi8d3m1k" path="res://src/core/game/game.gd" id="1_cky5y"]
+
+[node name="Game" type="Node" unique_id=1707179465]
+script = ExtResource("1_cky5y")
+metadata/_custom_type_script = "uid://ds424mi8d3m1k"
+
+[node name="Systems" type="Node" parent="." unique_id=2137385099]
+
+[node name="World" type="Node2D" parent="." unique_id=971566576]
+
+[node name="EntityRoot" type="Node2D" parent="World" unique_id=170688924]
+unique_name_in_owner = true
+
+[node name="StageRoot" type="Node2D" parent="World" unique_id=1848741826]
+unique_name_in_owner = true
