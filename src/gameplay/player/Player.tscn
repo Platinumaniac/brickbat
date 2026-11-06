@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtfuijwsv4pcw" path="res://src/gameplay/player/player.gd" id="1_2bvh7"]
 [ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="1_khxic"]
+[ext_resource type="PackedScene" uid="uid://dqi5roll8q8pa" path="res://src/gameplay/brick/Brick.tscn" id="2_km0ph"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2vyxd"]
 radius = 8.0
@@ -9,6 +10,7 @@ height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=44113300]
 script = ExtResource("1_2bvh7")
+brick_scene = ExtResource("2_km0ph")
 metadata/_custom_type_script = "uid://dtfuijwsv4pcw"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55558051]
@@ -17,3 +19,6 @@ shape = SubResource("CapsuleShape2D_2vyxd")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463184521]
 scale = Vector2(0.12499999, 0.24999999)
 texture = ExtResource("1_khxic")
+
+[node name="BrickRoot" type="Node2D" parent="." unique_id=873560310]
+unique_name_in_owner = true

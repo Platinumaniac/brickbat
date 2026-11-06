@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dqi5roll8q8pa"]
+
+[ext_resource type="Script" uid="uid://b3gcd2ec5ders" path="res://src/gameplay/brick/brick.gd" id="1_67e5p"]
+[ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="2_ytddb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(16, 8)
+
+[node name="Brick" type="Area2D" unique_id=1662710694]
+top_level = true
+collision_mask = 13
+script = ExtResource("1_67e5p")
+metadata/_custom_type_script = "uid://b3gcd2ec5ders"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1159377906]
+modulate = Color(1, 0.18039216, 0, 1)
+scale = Vector2(0.12499999, 0.0625)
+texture = ExtResource("2_ytddb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=401947813]
+shape = SubResource("RectangleShape2D_2vyxd")
