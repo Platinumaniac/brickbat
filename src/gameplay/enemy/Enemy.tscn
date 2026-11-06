@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ccs8plbfjd4mj"]
+
+[ext_resource type="Script" uid="uid://dwuc05gkueuty" path="res://src/gameplay/enemy/enemy.gd" id="1_ivp8h"]
+[ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="2_djgym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="Area2D" unique_id=423329651]
+collision_layer = 8
+collision_mask = 0
+input_pickable = false
+script = ExtResource("1_ivp8h")
+metadata/_custom_type_script = "uid://dwuc05gkueuty"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1139800144]
+shape = SubResource("RectangleShape2D_2vyxd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=287906327]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.12499999, 0.12499999)
+texture = ExtResource("2_djgym")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=40394204]
+wait_time = 0.5

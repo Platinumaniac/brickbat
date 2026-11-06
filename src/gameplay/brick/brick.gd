@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
-	
+
 	# had to make it a constant so it can share with the preview
 	velocity += ADDED_VELOCITY
 
@@ -34,4 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Building:
 		area.build(power)
 		get_tree().call_group("shake_camera", "add_trauma", 0.5)
+		queue_free()
+	elif area is Enemy:
+		area.attack(power)
 		queue_free()

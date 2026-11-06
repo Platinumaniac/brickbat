@@ -10,24 +10,24 @@ size = Vector2(64, 64)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_qkjw2")
+size = Vector2i(4, 4)
 progress_label = NodePath("ProgressLabel")
 metadata/_custom_type_script = "uid://bnrnxi5a5lj7a"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1025482470]
-position = Vector2(24, 24)
 shape = SubResource("RectangleShape2D_2vyxd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2120000706]
 modulate = Color(0.27387273, 0.27387273, 0.27387273, 1)
-position = Vector2(24, 24)
+position = Vector2(0, 9.536743e-07)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fgsua")
 
 [node name="ProgressLabel" type="Label" parent="." unique_id=2015722377]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 56.0
-offset_bottom = 56.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 text = "0%"
 horizontal_alignment = 1
 vertical_alignment = 1

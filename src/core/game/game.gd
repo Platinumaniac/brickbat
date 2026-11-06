@@ -59,3 +59,4 @@ func load_stage(stage_uid: String) -> void:
 
 	_stage_root.add_child(_current_stage)
 	_player.global_position = _current_stage.get_player_spawn()
+	SignalBus.stage_initiated.emit(_current_stage)
