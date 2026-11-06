@@ -13,6 +13,7 @@ var _player: Player
 var _current_stage: Stage
 
 func _ready() -> void:
+	SignalBus.quota_finished.connect(_on_quota_finished)
 	_init_player()
 	load_stage(_stage_uid)
 
@@ -60,3 +61,7 @@ func load_stage(stage_uid: String) -> void:
 	_stage_root.add_child(_current_stage)
 	_player.global_position = _current_stage.get_player_spawn()
 	SignalBus.stage_initiated.emit(_current_stage)
+
+func _on_quota_finished(won: bool) -> void:
+	if won:
+		pass 

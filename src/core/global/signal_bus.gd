@@ -12,3 +12,5 @@ signal building_destroyed(building: Building)
 signal building_path_requested(start: Vector2)
 
 signal building_path_calculated(start: Vector2, path: NavigationSystem.BuildingPath)
+
+signal quota_finished(won: bool)
