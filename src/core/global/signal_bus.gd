@@ -4,6 +4,8 @@ extends Node
 ## sent when the stage is added to the StageRoot
 signal stage_initiated(stage: Stage)
 
+signal enemy_added(enemy: Enemy)
+
 ## sent when a building has been built
 signal building_finished(building: Building)
 

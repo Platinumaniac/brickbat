@@ -64,4 +64,7 @@ func load_stage(stage_uid: String) -> void:
 
 func _on_quota_finished(won: bool) -> void:
 	if won:
-		pass 
+		pass
+
+func _on_enemy_added(enemy: Enemy) -> void:
+	_entity_root.add_child(enemy)
