@@ -4,6 +4,8 @@ class_name Brick
 ## how good the brick is at building and killing
 @export var power: float = 10
 
+const ADDED_VELOCITY = Vector2(0, 10)
+
 ## the direction the brick is moving in
 var velocity: Vector2
 
@@ -13,7 +15,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
-	velocity += Vector2(0, 10)
+	
+	# had to make it a constant so it can share with the preview
+	velocity += ADDED_VELOCITY
 
 	rotation = atan2(velocity.y, velocity.x)
 

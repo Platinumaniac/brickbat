@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dtfuijwsv4pcw" path="res://src/gameplay/player/player.gd" id="1_2bvh7"]
 [ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="1_khxic"]
 [ext_resource type="PackedScene" uid="uid://dqi5roll8q8pa" path="res://src/gameplay/brick/Brick.tscn" id="2_km0ph"]
+[ext_resource type="Script" uid="uid://fj25yuxjetwj" path="res://src/gameplay/brick/trajectory_preview.gd" id="4_yfsif"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2vyxd"]
 radius = 8.0
@@ -23,3 +24,9 @@ texture = ExtResource("1_khxic")
 
 [node name="BrickRoot" type="Node2D" parent="." unique_id=873560310]
 unique_name_in_owner = true
+
+[node name="TrajectoryPreview" type="Line2D" parent="." unique_id=771039982]
+unique_name_in_owner = true
+width = 1.0
+default_color = Color(1, 1, 1, 0.4627451)
+script = ExtResource("4_yfsif")

@@ -15,10 +15,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_mouse_position = event.global_position
 
 	elif event.is_action_pressed("throw_brick"):
-		var viewport_rect = get_viewport().get_visible_rect()
-		var centered_mouse_position: Vector2 = _mouse_position - viewport_rect.size / 2
-		_throw_brick((centered_mouse_position - global_position).normalized() * _throw_speed)
+		_throw_brick(get_throw_velocity())
 
+# moved here so the preview can read it
+func get_throw_velocity() -> Vector2:
+	var viewport_rect = get_viewport().get_visible_rect()
+	var centered_mouse_position: Vector2 = _mouse_position - viewport_rect.size / 2
+	return (centered_mouse_position - global_position).normalized() * _throw_speed
 
 func _physics_process(delta: float) -> void:
 	var move_input = Input.get_axis("move_left", "move_right")
