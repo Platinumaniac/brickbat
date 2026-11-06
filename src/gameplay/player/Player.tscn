@@ -9,6 +9,7 @@ radius = 8.0
 height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=44113300]
+z_index = 5
 script = ExtResource("1_2bvh7")
 brick_scene = ExtResource("2_km0ph")
 metadata/_custom_type_script = "uid://dtfuijwsv4pcw"

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dyyle1tiitayn"]
+
+[ext_resource type="Script" uid="uid://bnrnxi5a5lj7a" path="res://src/gameplay/building/building.gd" id="1_qkjw2"]
+[ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="2_fgsua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(64, 64)
+
+[node name="Building" type="Area2D" unique_id=704800898 node_paths=PackedStringArray("progress_label")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_qkjw2")
+progress_label = NodePath("ProgressLabel")
+metadata/_custom_type_script = "uid://bnrnxi5a5lj7a"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1025482470]
+position = Vector2(24, 24)
+shape = SubResource("RectangleShape2D_2vyxd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2120000706]
+modulate = Color(0.27387273, 0.27387273, 0.27387273, 1)
+position = Vector2(24, 24)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fgsua")
+
+[node name="ProgressLabel" type="Label" parent="." unique_id=2015722377]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 56.0
+offset_bottom = 56.0
+text = "0%"
+horizontal_alignment = 1
+vertical_alignment = 1

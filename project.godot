@@ -15,6 +15,10 @@ run/main_scene="uid://c2spurn3pjjdm"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+SignalBus="*uid://dyxugwiy4tfhw"
+
 [display]
 
 window/size/viewport_width=640
@@ -45,7 +49,7 @@ throw_brick={
 
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="brick"
-2d_physics/layer_3="house"
+2d_physics/layer_3="building"
 2d_physics/layer_4="enemies"
 
 [physics]
