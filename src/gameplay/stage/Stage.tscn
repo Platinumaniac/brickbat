@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bwmlpe8m7bnc6" path="res://assets/icon.svg" id="1_i3rf1"]
 [ext_resource type="Script" uid="uid://dmdn7c632ktnw" path="res://src/gameplay/stage/stage.gd" id="1_osl5s"]
 [ext_resource type="PackedScene" uid="uid://dyyle1tiitayn" path="res://src/gameplay/building/Building.tscn" id="3_xoyka"]
+[ext_resource type="Script" uid="uid://cffhngadtopdq" path="res://src/gameplay/stage/camera_2d.gd" id="4_ofpdg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xoyka"]
 texture = ExtResource("1_i3rf1")
@@ -152,6 +153,7 @@ script = ExtResource("1_osl5s")
 spawn_marker = NodePath("SpawnMarker")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1089303288]
+script = ExtResource("4_ofpdg")
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=445283488]
 position = Vector2(0, 128)

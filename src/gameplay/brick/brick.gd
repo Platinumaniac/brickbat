@@ -27,9 +27,11 @@ func _shatter() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Stage:
+		get_tree().call_group("shake_camera", "add_trauma", 0.4)
 		_shatter()
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Building:
 		area.build(power)
+		get_tree().call_group("shake_camera", "add_trauma", 0.5)
 		queue_free()
