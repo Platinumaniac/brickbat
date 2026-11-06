@@ -16,6 +16,10 @@ func _physics_process(delta: float) -> void:
 
 	rotation = atan2(velocity.y, velocity.x)
 
+## called when brick is broken
+func _shatter() -> void:
+	queue_free()
+
 func _on_body_entered(body: Node2D) -> void:
-	if body is TileMapLayer:
-		queue_free()
+	if body is Stage:
+		_shatter()
