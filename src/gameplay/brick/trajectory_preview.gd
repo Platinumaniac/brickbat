@@ -1,12 +1,12 @@
 extends Line2D
 class_name TrajectoryPreview
 
-# higher = longer line, i believe 90 to be sufficient but 
+# higher = longer line, i believe 90 to be sufficient but
 # might need to be altered if it were to be a in a level with many slopes
 @export var steps: int = 90
 
 # we should also add the enemies layers if we want that
-@export_flags_2d_physics var collision_mask: int = 1
+@export_flags_2d_physics var collision_mask: int = 1 | 4 | 8
 
 @onready var _player: Player = get_parent() as Player
 
@@ -28,6 +28,7 @@ func _process(_delta: float) -> void:
 		vel += Brick.ADDED_VELOCITY
 
 		var query = PhysicsRayQueryParameters2D.create(pos, next_pos, collision_mask)
+		query.collide_with_areas = true
 		var hit = space.intersect_ray(query)
 		if hit:
 			add_point(hit.position)
