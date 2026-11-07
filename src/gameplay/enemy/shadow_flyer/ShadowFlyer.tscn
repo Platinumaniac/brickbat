@@ -1,0 +1,176 @@
+[gd_scene format=3 uid="uid://bf528g5w0ayrq"]
+
+[ext_resource type="Script" uid="uid://dde4vghki3n83" path="res://src/gameplay/enemy/shadow_flyer/shadow_flyer.gd" id="1_arpyg"]
+[ext_resource type="Texture2D" uid="uid://dmwr20kpsl63j" path="res://assets/enemies/shadow_flyer.png" id="2_kpxpg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_arpyg"]
+radius = 15.0
+height = 40.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_arpyg"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kpxpg"]
+animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f1i8y"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lp3qm"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2h1q7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_niga5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b7at0"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bhvn2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y5atn"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2vyxd"]
+states/attack/node = SubResource("AnimationNodeAnimation_arpyg")
+states/attack/position = Vector2(386, 35)
+states/death/node = SubResource("AnimationNodeAnimation_kpxpg")
+states/death/position = Vector2(433, 100)
+states/fall/node = SubResource("AnimationNodeAnimation_f1i8y")
+states/fall/position = Vector2(540, 100)
+states/fly/node = SubResource("AnimationNodeAnimation_lp3qm")
+states/fly/position = Vector2(304, 100)
+transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_2h1q7"), "fly", "attack", SubResource("AnimationNodeStateMachineTransition_niga5"), "attack", "fly", SubResource("AnimationNodeStateMachineTransition_b7at0"), "fly", "death", SubResource("AnimationNodeStateMachineTransition_bhvn2"), "death", "fall", SubResource("AnimationNodeStateMachineTransition_y5atn")]
+
+[sub_resource type="Animation" id="Animation_arpyg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_f1i8y"]
+resource_name = "attack"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_lp3qm"]
+resource_name = "death"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_2h1q7"]
+resource_name = "fall"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_kpxpg"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1i8y"]
+_data = {
+&"RESET": SubResource("Animation_arpyg"),
+&"attack": SubResource("Animation_f1i8y"),
+&"death": SubResource("Animation_lp3qm"),
+&"fall": SubResource("Animation_2h1q7"),
+&"fly": SubResource("Animation_kpxpg")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2vyxd"]
+
+[node name="ShadowFlyer" type="Area2D" unique_id=1809089616]
+script = ExtResource("1_arpyg")
+metadata/_custom_type_script = "uid://dwuc05gkueuty"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1634203821]
+unique_name_in_owner = true
+z_index = 7
+texture = ExtResource("2_kpxpg")
+offset = Vector2(4, 10)
+hframes = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=677379322]
+position = Vector2(0, -3)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_arpyg")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=294764360]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_2vyxd")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1446688496]
+libraries/ = SubResource("AnimationLibrary_f1i8y")
+
+[node name="FallBox" type="Area2D" parent="." unique_id=1718313013]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallBox" unique_id=1881319833]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_2vyxd")
+debug_color = Color(0.70746607, 0.48389894, 0.17790297, 0.41960785)

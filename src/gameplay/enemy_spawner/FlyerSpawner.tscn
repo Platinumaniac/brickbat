@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cib26m581p1j0"]
+
+[ext_resource type="Script" uid="uid://crd4atrfg8sl7" path="res://src/gameplay/enemy_spawner/enemy_spawner.gd" id="1_8padk"]
+[ext_resource type="PackedScene" uid="uid://bf528g5w0ayrq" path="res://src/gameplay/enemy/shadow_flyer/ShadowFlyer.tscn" id="2_ada5m"]
+
+[node name="FlyerSpawner" type="Marker2D" unique_id=1613288796]
+script = ExtResource("1_8padk")
+enemy_scene = ExtResource("2_ada5m")
+metadata/_custom_type_script = "uid://crd4atrfg8sl7"

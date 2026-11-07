@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dhop6etnp7ncd" path="res://src/gameplay/enemy_spawner/GroundEnemySpawner.tscn" id="2_dqmce"]
 [ext_resource type="Texture2D" uid="uid://6yunvwjuri4w" path="res://assets/tilesets/ground.png" id="2_votta"]
 [ext_resource type="Texture2D" uid="uid://df0hwukpnu53y" path="res://assets/tilesets/foliage.png" id="3_dqmce"]
+[ext_resource type="PackedScene" uid="uid://cib26m581p1j0" path="res://src/gameplay/enemy_spawner/FlyerSpawner.tscn" id="3_vdv31"]
 [ext_resource type="Script" uid="uid://cffhngadtopdq" path="res://src/gameplay/stage/camera_2d.gd" id="3_xoyka"]
 [ext_resource type="PackedScene" uid="uid://dyyle1tiitayn" path="res://src/gameplay/building/Building.tscn" id="4_3faw4"]
 [ext_resource type="Texture2D" uid="uid://dyo3uqa8lel2a" path="res://assets/tilesets/tileset0.png" id="5_vsv6w"]
@@ -143,6 +144,7 @@ texture = ExtResource("1_i3rf1")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vsv6w"]
 scenes/1/scene = ExtResource("2_dqmce")
+scenes/2/scene = ExtResource("3_vdv31")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsv6w"]
 texture = ExtResource("2_votta")

@@ -15,6 +15,7 @@ const FOLLIAGE_GRASS := Vector2i(1, 0)
 
 const SPAWNER_ATLAS_ID: int = 1
 const GROUND_ENEMY_SPAWNER_ID: int = 1
+const FLYER_SPAWNER_ID: int = 2
 
 #probability for different tiles
 const CHANGE_CHANCE := 0.3
@@ -122,3 +123,5 @@ func _generate_enemy_spawners(heights: Array[int]) -> void:
 	var layer_origin = target_layer.local_to_map(ORIGIN)
 	target_layer.set_cell(Vector2i(layer_origin.x, layer_origin.y - heights[0]), SPAWNER_ATLAS_ID, Vector2i.ZERO, GROUND_ENEMY_SPAWNER_ID)
 	target_layer.set_cell(Vector2i(layer_origin.x + WIDTH,layer_origin.y - heights[-1]), SPAWNER_ATLAS_ID, Vector2i.ZERO, GROUND_ENEMY_SPAWNER_ID)
+	target_layer.set_cell(Vector2i(layer_origin.x, -5), SPAWNER_ATLAS_ID, Vector2i.ZERO, FLYER_SPAWNER_ID)
+	target_layer.set_cell(Vector2i(layer_origin.x + WIDTH, -5), SPAWNER_ATLAS_ID, Vector2i.ZERO, FLYER_SPAWNER_ID)
