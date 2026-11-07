@@ -13,6 +13,9 @@ const MAX_DROP := 2
 const GRASS_CHANCE := 0.75
 const FOLLIAGE_GRASS := Vector2i(1, 0)
 
+const SPAWNER_ATLAS_ID: int = 1
+const GROUND_ENEMY_SPAWNER_ID: int = 1
+
 #probability for different tiles
 const CHANGE_CHANCE := 0.3
 
@@ -82,16 +85,21 @@ func generate_terrain() -> void:
 		var lx: int = low_x - s
 		if lx >= 0 and lx < WIDTH and heights[lx] == heights[low_x]:
 			layer.set_cell(Vector2i(origin.x + lx, row - 1), SOURCE, Vector2i(21 - 2 * s, 0))
-	for x in WIDTH:
-		if absi(x - CENTER) <= FLAT_RADIUS:
-			continue #keep the spawn/building area clean and flat
-		var top_cell := Vector2i(origin.x + x, origin.y - heights[x])
-		if layer.get_cell_atlas_coords(top_cell) != GRASS:
-			continue
-		if layer.get_cell_source_id(top_cell + Vector2i.UP) != -1:
-			continue
-		if rng.randf() < GRASS_CHANCE:
-			layer.set_cell(top_cell + Vector2i.UP, SOURCE, Vector2i(1, 0))
+
+	#TODO: add grass to a foreground layer
+	#for x in WIDTH:
+	#	if absi(x - CENTER) <= FLAT_RADIUS:
+	#		continue #keep the spawn/building area clean and flat
+	#	var top_cell := Vector2i(origin.x + x, origin.y - heights[x])
+	#	if layer.get_cell_atlas_coords(top_cell) != GRASS:
+	#		continue
+	#	if layer.get_cell_source_id(top_cell + Vector2i.UP) != -1:
+	#		continue
+	#	if rng.randf() < GRASS_CHANCE:
+	#		layer.set_cell(top_cell + Vector2i.UP, SOURCE, Vector2i(1, 0))
+
+	_generate_enemy_spawners(heights)
+
 func _build_heights(rng: RandomNumberGenerator) -> Array[int]:
 	var heights: Array[int] = []
 	heights.resize(WIDTH)
@@ -109,3 +117,8 @@ func _build_heights(rng: RandomNumberGenerator) -> Array[int]:
 			x += dir
 	_fill_narrow_valleys(heights)
 	return heights
+
+func _generate_enemy_spawners(heights: Array[int]) -> void:
+	var layer_origin = target_layer.local_to_map(ORIGIN)
+	target_layer.set_cell(Vector2i(layer_origin.x, layer_origin.y - heights[0]), SPAWNER_ATLAS_ID, Vector2i.ZERO, GROUND_ENEMY_SPAWNER_ID)
+	target_layer.set_cell(Vector2i(layer_origin.x + WIDTH,layer_origin.y - heights[-1]), SPAWNER_ATLAS_ID, Vector2i.ZERO, GROUND_ENEMY_SPAWNER_ID)

@@ -839,7 +839,6 @@ sources/0 = SubResource("TileSetAtlasSource_votta")
 
 [node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker")]
 z_index = 6
-tile_map_data = PackedByteArray(0, 0, 19, 0, 8, 0, 1, 0, 0, 0, 0, 0, 1, 0)
 tile_set = SubResource("TileSet_km6bk")
 script = ExtResource("1_osl5s")
 spawn_marker = NodePath("Marker2D")

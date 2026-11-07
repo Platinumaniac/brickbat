@@ -9,10 +9,7 @@ var _building_map: Dictionary[Vector2i, Building]
 func _ready() -> void:
 
 	_nav_grid.cell_size = Vector2i(16, 16)
-	_nav_grid.region = Rect2i(-20, -12, 40, 24)
-	_nav_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	_nav_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	_nav_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	_nav_grid.region = Rect2i(-50, -50, 100, 100)
 	_nav_grid.update()
 
 	SignalBus.stage_initiated.connect(_on_stage_initiated)
