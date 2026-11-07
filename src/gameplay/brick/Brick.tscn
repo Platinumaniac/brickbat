@@ -3,8 +3,17 @@
 [ext_resource type="Script" uid="uid://b3gcd2ec5ders" path="res://src/gameplay/brick/brick.gd" id="1_67e5p"]
 [ext_resource type="AudioStream" uid="uid://c23t7aew06xky" path="res://audio/EnemyHit/enemy_hit.tres" id="3_4iffm"]
 [ext_resource type="AudioStream" uid="uid://bf3h1kbbav3v5" path="res://audio/GroundHit/ground_hit.tres" id="3_k0mfh"]
-[ext_resource type="AudioStream" uid="uid://bkyncwsm60qrk" path="res://audio/BuildingHit/building_hit.tres" id="4_5ia5r"]
+[ext_resource type="AudioStream" uid="uid://unsokrnib1fa" path="res://audio/BuildingHit/SFX_CJ26_BB_BrickHouseHit_RR1.wav" id="4_kkmpd"]
+[ext_resource type="AudioStream" uid="uid://d0vqfhsade2g8" path="res://audio/BuildingHit/SFX_CJ26_BB_BrickHouseHit_RR2.wav" id="5_51for"]
 [ext_resource type="Texture2D" uid="uid://cae4hkhl33x3t" path="res://assets/frank/brick.png" id="5_k0mfh"]
+[ext_resource type="AudioStream" uid="uid://cw775pa6yy5el" path="res://audio/BuildingHit/SFX_CJ26_BB_BrickHouseHit_RR3.wav" id="6_2qhsa"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i4wog"]
+random_volume_offset_db = 5.0
+streams_count = 3
+stream_0/stream = ExtResource("4_kkmpd")
+stream_1/stream = ExtResource("5_51for")
+stream_2/stream = ExtResource("6_2qhsa")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
 size = Vector2(17, 10)
@@ -16,7 +25,7 @@ collision_mask = 13
 script = ExtResource("1_67e5p")
 enemy_hit = ExtResource("3_4iffm")
 ground_hit = ExtResource("3_k0mfh")
-building_hit = ExtResource("4_5ia5r")
+building_hit = SubResource("AudioStreamRandomizer_i4wog")
 metadata/_custom_type_script = "uid://b3gcd2ec5ders"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1159377906]

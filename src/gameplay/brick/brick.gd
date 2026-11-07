@@ -6,7 +6,7 @@ class_name Brick
 @export var building_hit: AudioStreamRandomizer
 
 ## how good the brick is at building and killing
-@export var power: float = 10
+@export var power: float = 20
 
 const ADDED_VELOCITY = Vector2(0, 10)
 

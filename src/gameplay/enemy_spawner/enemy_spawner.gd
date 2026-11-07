@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 			_time_to_spawn = spawn_delay
 
 func _spawn_enemy() -> void:
-	var instance_duplicate = _enemy_instance.duplicate()
+	var instance_duplicate = _enemy_instance.duplicate(DUPLICATE_USE_INSTANTIATION)
 	instance_duplicate.global_position = global_position
 	instance_duplicate.navigation_path = _navigation_path.duplicate()
 	instance_duplicate.target_building = _target_building
