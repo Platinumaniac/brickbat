@@ -837,6 +837,9 @@ texture = ExtResource("2_votta")
 [sub_resource type="TileSet" id="TileSet_2vyxd"]
 sources/0 = SubResource("TileSetAtlasSource_votta")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(20, 370)
+
 [node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker")]
 z_index = 6
 tile_set = SubResource("TileSet_km6bk")
@@ -863,3 +866,19 @@ tile_set = SubResource("TileSet_2vyxd")
 [node name="Node" type="Node" parent="." unique_id=1279040590 node_paths=PackedStringArray("target_layer")]
 script = ExtResource("8_dqmce")
 target_layer = NodePath("..")
+
+[node name="LeftBorder" type="StaticBody2D" parent="." unique_id=74134006]
+position = Vector2(-328, 176)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBorder" unique_id=956063067]
+position = Vector2(0, -175)
+shape = SubResource("RectangleShape2D_2vyxd")
+
+[node name="RightBorder" type="StaticBody2D" parent="." unique_id=2022702282]
+position = Vector2(336, 176)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBorder" unique_id=1791817121]
+position = Vector2(0, -175)
+shape = SubResource("RectangleShape2D_2vyxd")
