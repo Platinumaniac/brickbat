@@ -38,21 +38,22 @@ func _on_body_entered(body: Node2D) -> void:
 		get_tree().call_group("shake_camera", "add_trauma", 0.4)
 		play_hit_sound("ground")
 		_shatter()
-
-func _on_area_entered(area: Area2D) -> void:
-	if area is Building:
-		area.build(power)
+	elif body is Building:
+		body.build(power)
 		get_tree().call_group("shake_camera", "add_trauma", 0.5)
 		play_hit_sound("building")
 		_shatter()
-	elif area is Enemy:
+
+func _on_area_entered(area: Area2D) -> void:
+
+	if area is Enemy:
 		area.attack(power)
 		play_hit_sound("enemy")
 		_shatter()
 
 func play_hit_sound(target_type: String) -> void:
-	%BrickHitAudio.stop() 
-	
+	%BrickHitAudio.stop()
+
 	match target_type:
 		"enemy":
 			%BrickHitAudio.stream = enemy_hit

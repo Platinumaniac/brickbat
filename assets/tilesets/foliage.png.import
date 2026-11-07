@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt0b2y7ab8smr"
-path="res://.godot/imported/brick.png-2752dffcc7852625bd2ce25e2bde0c3a.ctex"
+uid="uid://df0hwukpnu53y"
+path="res://.godot/imported/foliage.png-623b00f21a67131ac5fcdbfb13ed6c79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/brick.png"
-dest_files=["res://.godot/imported/brick.png-2752dffcc7852625bd2ce25e2bde0c3a.ctex"]
+source_file="res://assets/tilesets/foliage.png"
+dest_files=["res://.godot/imported/foliage.png-623b00f21a67131ac5fcdbfb13ed6c79.ctex"]
 
 [params]
 

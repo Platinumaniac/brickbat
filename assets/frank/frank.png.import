@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cts3v5bevlk80"
-path="res://.godot/imported/frank.png-e6186d2d060fdbab4cfaa250069e10d8.ctex"
+uid="uid://cctse043ksgrr"
+path="res://.godot/imported/frank.png-7fcccc1be4a593d53f601bfaf2522115.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/frank.png"
-dest_files=["res://.godot/imported/frank.png-e6186d2d060fdbab4cfaa250069e10d8.ctex"]
+source_file="res://assets/frank/frank.png"
+dest_files=["res://.godot/imported/frank.png-7fcccc1be4a593d53f601bfaf2522115.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5mislh8s2hvj"
-path="res://.godot/imported/trajectory_bubbles.png-502fe87fc081252ef5610f21f5285e5d.ctex"
+uid="uid://ukymkk2mw41i"
+path="res://.godot/imported/trajectory_bubbles.png-8e037f2259ea45167255e234c294764c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/trajectory_bubbles.png"
-dest_files=["res://.godot/imported/trajectory_bubbles.png-502fe87fc081252ef5610f21f5285e5d.ctex"]
+source_file="res://assets/frank/trajectory_bubbles.png"
+dest_files=["res://.godot/imported/trajectory_bubbles.png-8e037f2259ea45167255e234c294764c.ctex"]
 
 [params]
 

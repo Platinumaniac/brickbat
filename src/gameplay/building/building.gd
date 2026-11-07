@@ -1,16 +1,11 @@
-extends Area2D
+extends TileMapLayer
 class_name Building
 
 @export var size: Vector2i
 @export var build_cost: float = 200
 @export var progress_label: Label
+@export var brick_layer: TileMapLayer
 
-var build_progress: float
-
-func _update_label() -> void:
-	if progress_label != null:
-		var format_string = "%d%%"
-		progress_label.text = format_string % (build_progress / build_cost * 100)
 @export_group("Quota")
 
 ## quota countdown.
@@ -33,6 +28,8 @@ func _update_label() -> void:
 ## remaining time label.
 @export var timer_label: Label
 
+var build_progress: float
+
 ## goal of current quota from 0 to 1
 var _quota_goal: float
 
@@ -44,6 +41,20 @@ var _blink_tween: Tween
 func _ready() -> void:
 	if timer_label != null:
 		timer_label.visible = false
+
+func _process(delta: float) -> void:
+	if !_quota_running and Input.is_action_just_pressed("q"):
+		$AudioStreamPlayer2D.play()
+		start_quota()
+
+	if not _quota_running:
+		return
+
+	_time_left -= delta
+	_update_timer_label()
+
+	if _time_left <= 0.0:
+		_finish_quota(false)
 
 func start_quota() -> void:
 	# if it were to start another quota mid blink
@@ -62,25 +73,10 @@ func start_quota() -> void:
 	_update_timer_label()
 	_update_progress_label()
 
-func _process(delta: float) -> void:
-	if !_quota_running and Input.is_action_just_pressed("q"):
-		$AudioStreamPlayer2D.play()
-		start_quota()
-
-	if not _quota_running:
-		return
-
-	_time_left -= delta
-	_update_timer_label()
-
-	if _time_left <= 0.0:
-		_finish_quota(false)
-
-
 func build(amount: float) -> void:
 	_build_progress = clamp(_build_progress + amount, 0, build_cost)
-
 	_update_progress_label()
+	_update_brick_map()
 
 	if build_progress == build_cost:
 		SignalBus.building_finished.emit(self)
@@ -96,6 +92,19 @@ func attack(damage: float) -> void:
 
 	if build_progress == damage:
 		SignalBus.building_destroyed.emit(self)
+
+func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:
+	if a.y == b.y:
+		return a.x < b.x
+	else:
+		return a.y < b.y
+
+
+func _update_label() -> void:
+	if progress_label != null:
+		var format_string = "%d%%"
+		progress_label.text = format_string % (build_progress / build_cost * 100)
+
 func _update_progress_label() -> void:
 	if progress_label == null:
 		return
@@ -108,6 +117,21 @@ func _update_progress_label() -> void:
 	else:
 		progress_label.text = "%d%%" % progress_percent
 
+func _update_brick_map() -> void:
+	var outline_cells = get_used_cells()
+	outline_cells.sort_custom(_sort_by_position)
+	var brick_cells = brick_layer.get_used_cells()
+	var build_ratio = _build_progress / build_cost
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+	for i in range(len(outline_cells) * build_ratio):
+		var cell = outline_cells[-(i+1)]
+
+		if cell not in brick_cells:
+			brick_layer.set_cell(cell, 1, Vector2i(rng.randi_range(0, 4), 1))
+
+
+
 # shows the remaining time as m:ss
 func _update_timer_label() -> void:
 	if timer_label == null:
@@ -115,7 +139,6 @@ func _update_timer_label() -> void:
 
 	var total_seconds = floori(maxf(_time_left, 0.0))
 	timer_label.text = "%d:%02d" % [total_seconds / 60, total_seconds % 60]
-
 
 func _finish_quota(won: bool) -> void:
 	_quota_running = false

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dtfuijwsv4pcw" path="res://src/gameplay/player/player.gd" id="1_2bvh7"]
 [ext_resource type="PackedScene" uid="uid://dqi5roll8q8pa" path="res://src/gameplay/brick/Brick.tscn" id="2_km0ph"]
-[ext_resource type="Texture2D" uid="uid://cts3v5bevlk80" path="res://assets/frank.png" id="3_yfsif"]
+[ext_resource type="Texture2D" uid="uid://cctse043ksgrr" path="res://assets/frank/frank.png" id="3_vgqeu"]
 [ext_resource type="Script" uid="uid://fj25yuxjetwj" path="res://src/gameplay/brick/trajectory_preview.gd" id="4_yfsif"]
-[ext_resource type="Texture2D" uid="uid://5mislh8s2hvj" path="res://assets/trajectory_bubbles.png" id="5_wa5q6"]
+[ext_resource type="Texture2D" uid="uid://ukymkk2mw41i" path="res://assets/frank/trajectory_bubbles.png" id="5_vgqeu"]
 [ext_resource type="AudioStream" uid="uid://brwijescb4dhu" path="res://audio/WalkStep/SFX_CJ26_BB_WalkStep_RR1.wav" id="6_vgqeu"]
 [ext_resource type="AudioStream" uid="uid://bdc52w8erwqam" path="res://audio/WalkStep/SFX_CJ26_BB_WalkStep_RR2.wav" id="7_21ga0"]
 [ext_resource type="AudioStream" uid="uid://dlll7rnoekbd8" path="res://audio/WalkStep/SFX_CJ26_BB_WalkStep_RR3.wav" id="8_2s24v"]
@@ -199,7 +199,7 @@ shape = SubResource("CapsuleShape2D_2vyxd")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463184521]
 unique_name_in_owner = true
 position = Vector2(1.5, -15)
-texture = ExtResource("3_yfsif")
+texture = ExtResource("3_vgqeu")
 offset = Vector2(-3, 0)
 flip_h = true
 hframes = 14
@@ -215,7 +215,7 @@ width = 1.0
 default_color = Color(1, 1, 1, 0.4627451)
 script = ExtResource("4_yfsif")
 steps = 20
-bubble_texture = ExtResource("5_wa5q6")
+bubble_texture = ExtResource("5_vgqeu")
 spacing = 12.0
 scroll_speed = 5.0
 biggest_first = true
