@@ -28,6 +28,9 @@ class_name Building
 ## remaining time label.
 @export var timer_label: Label
 
+const BRICK_CELLS: Array[Vector2i] = [Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1)]
+const HALF_BRICK_CELLS: Array[Vector2i] = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0)]
+
 ## goal of current quota from 0 to 1
 var _quota_goal: float
 
@@ -87,6 +90,7 @@ func attack(damage: float) -> void:
 	_build_progress = clamp(_build_progress - damage, 0, build_cost)
 
 	_update_label()
+	_update_brick_map()
 
 	if _build_progress == damage:
 		SignalBus.building_destroyed.emit(self)
@@ -121,12 +125,60 @@ func _update_brick_map() -> void:
 	var brick_cells = brick_layer.get_used_cells()
 	var build_ratio = _build_progress / build_cost
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var double_layered_outline_cells: Array = []
 
-	for i in range(len(outline_cells) * build_ratio):
-		var cell = outline_cells[-(i+1)]
+	var outline_cell_index: int = 0
+	var last_outline_layer_index: int = 0
+	for cell in outline_cells:
+		if outline_cell_index != 0:
+			if outline_cells[outline_cell_index-1].y != cell.y:
+				double_layered_outline_cells.append_array(outline_cells.slice(last_outline_layer_index, outline_cell_index))
+				double_layered_outline_cells.append_array(outline_cells.slice(last_outline_layer_index, outline_cell_index))
+
+				last_outline_layer_index = outline_cell_index
+			elif outline_cell_index == len(outline_cells) - 1:
+				double_layered_outline_cells.append_array(outline_cells.slice(last_outline_layer_index))
+				double_layered_outline_cells.append_array(outline_cells.slice(last_outline_layer_index))
+
+		outline_cell_index += 1
+	var brick_amount = len(outline_cells) * build_ratio * 2
+
+
+	for i in range(brick_amount):
+		if i > brick_amount:
+			break
+
+		var cell = double_layered_outline_cells[-(i+1)]
 
 		if cell not in brick_cells:
-			brick_layer.set_cell(cell, 1, Vector2i(rng.randi_range(0, 4), 1))
+			brick_layer.set_cell(cell, 1, HALF_BRICK_CELLS.pick_random())
+			brick_cells.push_back(cell)
+		else:
+			brick_layer.set_cell(cell, 1, BRICK_CELLS.pick_random())
+
+		i += 1
+
+	var brick_remove_index: int  = 0
+	var bricks_to_remove: int = len(brick_cells) - brick_amount
+	while bricks_to_remove > 0:
+		var cell = brick_cells[-(brick_remove_index + 1)]
+
+		var brick_coords = brick_layer.get_cell_atlas_coords(cell)
+
+		if brick_coords in BRICK_CELLS:
+			if bricks_to_remove >= 2:
+				brick_layer.set_cell(cell)
+				bricks_to_remove -= 2
+			else:
+				brick_layer.set_cell(cell, 1, HALF_BRICK_CELLS.pick_random())
+				bricks_to_remove -= 1
+		else:
+			brick_layer.set_cell(cell)
+			bricks_to_remove -= 1
+		brick_remove_index += 1
+
+
+
 
 # shows the remaining time as m:ss
 func _update_timer_label() -> void:

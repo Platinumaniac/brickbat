@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 		if _current_cooldown == 0 && !_is_attacking:
 			_is_attacking = true
 			await _attack_anim()
-			target_building.attack(power)
 			_current_cooldown = attack_cooldown
 			_is_attacking = false
 		elif _current_cooldown > 0:
@@ -39,6 +38,9 @@ func _march() -> void:
 func _move_anim(next_position: Vector2) -> void:
 	pass
 
+func attack_target() -> void:
+	target_building.attack(power)
+
 func _attack_anim() -> void:
 	pass
 
@@ -49,5 +51,6 @@ func attack(damage: float) -> void:
 	_health = clamp(_health - damage, 0, max_health)
 	if _health == 0:
 		_is_dead = true
+		set_deferred("monitorable", false)
 		await _death_anim()
 		queue_free()
