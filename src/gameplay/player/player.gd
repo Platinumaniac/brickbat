@@ -7,6 +7,7 @@ class_name Player
 @onready var _animation_tree: AnimationTree = %AnimationTree
 @onready var _sprite: Sprite2D = %Sprite2D
 
+var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _speed: float = 5000
 var _throw_speed: float = 400
 var _mouse_position: Vector2
@@ -54,6 +55,10 @@ func _physics_process(delta: float) -> void:
 
 	if _is_throwing:
 		velocity = Vector2.ZERO
+	if is_on_floor():
+		velocity.y = 0.0
+	else:
+		velocity.y += _gravity * delta * 4
 
 	move_and_slide()
 
