@@ -1,6 +1,8 @@
 extends Node
 ## signals across nodes here
 
+signal play_clicked
+
 ## sent when the stage is added to the StageRoot
 signal stage_initiated(stage: Stage)
 

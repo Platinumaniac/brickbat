@@ -3,6 +3,7 @@ class_name Game
 
 @onready var _entity_root: Node2D = %EntityRoot
 @onready var _stage_root: Node2D = %StageRoot
+@onready var _title_screen: Control = %TitleScreen
 
 ## for loading the player
 var _player_uid: String = "uid://sn3d6mmhnfno"
@@ -13,10 +14,10 @@ var _player: Player
 var _current_stage: Stage
 
 func _ready() -> void:
-	SignalBus.quota_finished.connect(_on_quota_finished)
-	SignalBus.enemy_added.connect(_on_enemy_added)
-	_init_player()
-	load_stage(_stage_uid)
+	if !Debug.bypass_title:
+		SignalBus.play_clicked.connect(_start_game)
+	else:
+		_start_game()
 
 func _init_player() -> void:
 	var player_scene = ResourceLoader.load(_player_uid, "PackedScene") as PackedScene
@@ -38,7 +39,14 @@ func _init_player() -> void:
 	_entity_root.add_child(_player)
 
 
-func load_stage(stage_uid: String) -> void:
+func _start_game() -> void:
+	_title_screen.hide()
+	SignalBus.quota_finished.connect(_on_quota_finished)
+	SignalBus.enemy_added.connect(_on_enemy_added)
+	_init_player()
+	_load_stage(_stage_uid)
+
+func _load_stage(stage_uid: String) -> void:
 	if _current_stage != null:
 		_current_stage.queue_free()
 		_current_stage = null

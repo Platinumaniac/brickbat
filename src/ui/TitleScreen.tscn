@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://klg7bg38yl32"]
+
+[ext_resource type="Script" uid="uid://cpirb44suisal" path="res://src/ui/title_screen.gd" id="1_4s51f"]
+[ext_resource type="Texture2D" uid="uid://dngn2x30j6828" path="res://assets/menus/title_screen/title_screen.png" id="1_rpyf2"]
+[ext_resource type="Texture2D" uid="uid://beukgoj75ic4d" path="res://assets/menus/title_screen/title_screen_play.png" id="2_h3gw6"]
+[ext_resource type="Texture2D" uid="uid://divltjc5m4xy8" path="res://assets/menus/title_screen/title_screen_play_clicked.png" id="4_lxthj"]
+
+[node name="TitleScreen" type="Control" unique_id=1567749240]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4s51f")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1291882261]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_rpyf2")
+
+[node name="PlayButton" type="TextureButton" parent="." unique_id=597792231]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 275.0
+offset_right = 332.0
+offset_bottom = 327.0
+texture_normal = ExtResource("2_h3gw6")
+texture_pressed = ExtResource("4_lxthj")
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_clicked"]
