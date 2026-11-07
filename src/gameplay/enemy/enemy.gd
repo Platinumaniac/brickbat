@@ -11,6 +11,7 @@ var target_building: Building
 
 var _health: float = max_health
 var _current_cooldown: float = 0
+var _is_attacking: bool
 var _is_dead: bool
 
 func _ready() -> void:
@@ -18,10 +19,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if target_building && len(navigation_path) == 0 && !_is_dead:
-		if _current_cooldown == 0:
+		if _current_cooldown == 0 && !_is_attacking:
+			_is_attacking = true
 			await _attack_anim()
 			target_building.attack(power)
 			_current_cooldown = attack_cooldown
+			_is_attacking = false
 		elif _current_cooldown > 0:
 			_current_cooldown = clamp(_current_cooldown - delta, 0, attack_cooldown)
 
@@ -43,10 +46,7 @@ func _death_anim() -> void:
 	await get_tree().create_timer(1.0).timeout
 
 func attack(damage: float) -> void:
-	print(_health)
-
 	_health = clamp(_health - damage, 0, max_health)
-	print(_health)
 	if _health == 0:
 		_is_dead = true
 		await _death_anim()

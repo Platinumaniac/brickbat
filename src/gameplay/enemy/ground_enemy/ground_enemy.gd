@@ -18,6 +18,5 @@ func _attack_anim() -> void:
 	await animation_tree.animation_finished
 
 func _death_anim() -> void:
-	print("death")
 	animation_tree.get("parameters/playback").travel("death")
 	await animation_tree.animation_finished

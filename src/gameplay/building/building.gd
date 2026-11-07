@@ -28,8 +28,6 @@ class_name Building
 ## remaining time label.
 @export var timer_label: Label
 
-var build_progress: float
-
 ## goal of current quota from 0 to 1
 var _quota_goal: float
 
@@ -78,7 +76,7 @@ func build(amount: float) -> void:
 	_update_progress_label()
 	_update_brick_map()
 
-	if build_progress == build_cost:
+	if _build_progress == build_cost:
 		SignalBus.building_finished.emit(self)
 
 	# quota reached while the timer is still running = win
@@ -86,11 +84,11 @@ func build(amount: float) -> void:
 		_finish_quota(true)
 
 func attack(damage: float) -> void:
-	build_progress = clamp(build_progress - damage, 0, build_cost)
+	_build_progress = clamp(_build_progress - damage, 0, build_cost)
 
 	_update_label()
 
-	if build_progress == damage:
+	if _build_progress == damage:
 		SignalBus.building_destroyed.emit(self)
 
 func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:
@@ -103,7 +101,7 @@ func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:
 func _update_label() -> void:
 	if progress_label != null:
 		var format_string = "%d%%"
-		progress_label.text = format_string % (build_progress / build_cost * 100)
+		progress_label.text = format_string % (_build_progress / build_cost * 100)
 
 func _update_progress_label() -> void:
 	if progress_label == null:
