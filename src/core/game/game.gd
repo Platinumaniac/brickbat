@@ -14,6 +14,7 @@ var _current_stage: Stage
 
 func _ready() -> void:
 	SignalBus.quota_finished.connect(_on_quota_finished)
+	SignalBus.enemy_added.connect(_on_enemy_added)
 	_init_player()
 	load_stage(_stage_uid)
 

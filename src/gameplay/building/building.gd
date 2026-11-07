@@ -130,8 +130,6 @@ func _update_brick_map() -> void:
 		if cell not in brick_cells:
 			brick_layer.set_cell(cell, 1, Vector2i(rng.randi_range(0, 4), 1))
 
-
-
 # shows the remaining time as m:ss
 func _update_timer_label() -> void:
 	if timer_label == null:

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dhop6etnp7ncd"]
+
+[ext_resource type="Script" uid="uid://crd4atrfg8sl7" path="res://src/gameplay/enemy_spawner/enemy_spawner.gd" id="1_qmnj1"]
+[ext_resource type="PackedScene" uid="uid://ccs8plbfjd4mj" path="res://src/gameplay/enemy/ground_enemy/GroundEnemy.tscn" id="2_ggcyh"]
+
+[node name="GroundEnemySpawner" type="Marker2D" unique_id=1554520119]
+script = ExtResource("1_qmnj1")
+enemy_scene = ExtResource("2_ggcyh")
+metadata/_custom_type_script = "uid://crd4atrfg8sl7"

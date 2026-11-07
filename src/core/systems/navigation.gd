@@ -7,8 +7,12 @@ var _nav_grid: AStarGrid2D = AStarGrid2D.new()
 var _building_map: Dictionary[Vector2i, Building]
 
 func _ready() -> void:
+
 	_nav_grid.cell_size = Vector2i(16, 16)
 	_nav_grid.region = Rect2i(-20, -12, 40, 24)
+	_nav_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	_nav_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	_nav_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	_nav_grid.update()
 
 	SignalBus.stage_initiated.connect(_on_stage_initiated)
@@ -37,18 +41,17 @@ func _get_path_to_building(start_position: Vector2) -> BuildingPath:
 		point_index += 1
 
 
-
 	return BuildingPath.new(path, _building_map[building_positions[0]])
 
 func _on_stage_initiated(stage: Stage) -> void:
 	_stage = stage
 	_building_map = _stage.get_building_map()
 	for cell in _stage.get_used_cells():
-		_nav_grid.set_point_solid(cell)
+		if _stage.get_cell_source_id(cell) != 1:
+			_nav_grid.set_point_solid(cell)
 
 	for cell in _building_map.keys():
 		_nav_grid.set_point_solid(cell)
-
 
 func _on_building_path_requested(start_position: Vector2) -> void:
 	SignalBus.building_path_calculated.emit(start_position, _get_path_to_building(start_position))
