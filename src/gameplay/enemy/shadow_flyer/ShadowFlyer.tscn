@@ -139,8 +139,6 @@ _data = {
 &"fly": SubResource("Animation_kpxpg")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2vyxd"]
-
 [node name="ShadowFlyer" type="Area2D" unique_id=1809089616]
 script = ExtResource("1_arpyg")
 metadata/_custom_type_script = "uid://dwuc05gkueuty"
@@ -165,12 +163,3 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1446688496]
 libraries/ = SubResource("AnimationLibrary_f1i8y")
-
-[node name="FallBox" type="Area2D" parent="." unique_id=1718313013]
-unique_name_in_owner = true
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FallBox" unique_id=1881319833]
-position = Vector2(0, 24)
-shape = SubResource("CapsuleShape2D_2vyxd")
-debug_color = Color(0.70746607, 0.48389894, 0.17790297, 0.41960785)

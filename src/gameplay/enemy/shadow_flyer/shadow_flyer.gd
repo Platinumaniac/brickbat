@@ -2,7 +2,6 @@ extends Enemy
 
 @onready var _sprite: Sprite2D = %Sprite2D
 @onready var _animation_tree: AnimationTree = %AnimationTree
-@onready var _fall_box: Area2D = %FallBox
 
 const FALL_SPEED: float = 200
 const FALL_TIME: float = 10.0
@@ -25,7 +24,6 @@ func _move_anim(next_position: Vector2) -> void:
 	_flip((next_position - position).x < 0)
 
 func _attack_anim() -> void:
-	print("flyer attack")
 	_animation_tree.get("parameters/playback").travel("attack")
 	await _animation_tree.animation_finished
 
