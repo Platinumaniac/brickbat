@@ -15,6 +15,8 @@ var _is_throwing: bool = false
 var _last_direction: float = 0
 
 func _ready() -> void:
+	SignalBus.building_finished.connect(_on_building_finished)
+	SignalBus.building_destroyed.connect(_on_building_destroyed)
 	_animation_tree.animation_finished.connect(_on_animation_finished)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -89,6 +91,22 @@ func _flip(flipped: bool) -> void:
 	else:
 		_sprite.offset.x = 0
 
+
+func _on_building_finished(building: Building) -> void:
+	$AnimationPlayer.play("win")
+
+
+func _on_building_destroyed(building: Building) -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	$AnimationPlayer.play("death")
+
+
 func _on_animation_finished(animation_name) -> void:
 	if animation_name == "throw":
 		_is_throwing = false
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "win":
+		$AnimationPlayer.play("win_idle")
+	if anim_name == "death":
+		$AnimationPlayer.play("death_idle")

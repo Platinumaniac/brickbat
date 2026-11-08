@@ -8,6 +8,7 @@ const TILESET_DAY = preload("res://assets/tilesets/tileset0_day.png")
 
 func _ready() -> void:
 	SignalBus.building_finished.connect(_on_building_finished)
+	SignalBus.building_destroyed.connect(_on_building_destroyed)
 
 func set_tileset_day() -> void:
 	var source := tile_set.get_source(4) as TileSetAtlasSource
@@ -15,12 +16,20 @@ func set_tileset_day() -> void:
 		return
 	source.texture = TILESET_DAY
 
+func free_all_enemies() -> void:
+	for enemy in get_tree().current_scene.find_children("*", "Enemy", true, false):
+		enemy.queue_free()
+
 func _on_building_finished(building: Building) -> void:
 	if animation_player == null:
 		return
+	get_tree().call_group("shake_camera", "add_trauma", 1.2)
 	animation_player.play("WinAnim")
 	get_tree().paused = true
 	## win screen, next stage here
+
+func _on_building_destroyed(building: Building) -> void:
+	get_tree().call_group("shake_camera", "add_trauma", 1.2)
 
 func get_player_spawn() -> Vector2:
 	if spawn_marker != null:
