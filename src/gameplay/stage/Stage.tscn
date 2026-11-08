@@ -832,6 +832,9 @@ sources/3 = SubResource("TileSetAtlasSource_vdv31")
 sources/1 = SubResource("TileSetScenesCollectionSource_vsv6w")
 sources/4 = SubResource("TileSetAtlasSource_t6k4j")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(20, 370)
+
 [sub_resource type="Animation" id="Animation_t6k4j"]
 length = 0.001
 tracks/0/type = "value"
@@ -889,7 +892,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..")
+tracks/2/path = NodePath("../..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -897,7 +900,7 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"set_tileset_day"
+"method": &"set_tileset"
 }, {
 "args": [],
 "method": &"free_all_enemies"
@@ -919,31 +922,14 @@ texture = ExtResource("2_votta")
 [sub_resource type="TileSet" id="TileSet_2vyxd"]
 sources/0 = SubResource("TileSetAtlasSource_votta")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
-size = Vector2(20, 370)
-
 [node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker", "animation_player")]
+process_mode = 3
 z_index = 6
 tile_set = SubResource("TileSet_km6bk")
 script = ExtResource("1_osl5s")
 spawn_marker = NodePath("Marker2D")
-animation_player = NodePath("GodText/AnimationPlayer")
+animation_player = NodePath("ShakeCamera/GodText/AnimationPlayer")
 metadata/_custom_type_script = "uid://dmdn7c632ktnw"
-
-[node name="GodText" type="Sprite2D" parent="." unique_id=1090057717]
-texture = ExtResource("8_t6k4j")
-hframes = 3
-vframes = 2
-
-[node name="Background" type="Sprite2D" parent="GodText" unique_id=76517136]
-z_index = -10
-texture = ExtResource("10_vdv31")
-hframes = 6
-vframes = 5
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GodText" unique_id=1115822020]
-process_mode = 3
-libraries/ = SubResource("AnimationLibrary_q0uq0")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1786558173]
 position = Vector2(0, 144)
@@ -952,6 +938,37 @@ position = Vector2(0, 144)
 process_mode = 3
 script = ExtResource("3_xoyka")
 metadata/_custom_type_script = "uid://cffhngadtopdq"
+
+[node name="LeftBorder" type="StaticBody2D" parent="ShakeCamera" unique_id=74134006]
+position = Vector2(-328, 176)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/LeftBorder" unique_id=956063067]
+position = Vector2(0, -175)
+shape = SubResource("RectangleShape2D_2vyxd")
+
+[node name="RightBorder" type="StaticBody2D" parent="ShakeCamera" unique_id=2022702282]
+position = Vector2(336, 176)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/RightBorder" unique_id=1791817121]
+position = Vector2(0, -175)
+shape = SubResource("RectangleShape2D_2vyxd")
+
+[node name="GodText" type="Sprite2D" parent="ShakeCamera" unique_id=1090057717]
+texture = ExtResource("8_t6k4j")
+hframes = 3
+vframes = 2
+
+[node name="Background" type="Sprite2D" parent="ShakeCamera/GodText" unique_id=76517136]
+z_index = -10
+texture = ExtResource("10_vdv31")
+hframes = 6
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShakeCamera/GodText" unique_id=1115822020]
+process_mode = 3
+libraries/ = SubResource("AnimationLibrary_q0uq0")
 
 [node name="Building" parent="." unique_id=704800898 instance=ExtResource("4_3faw4")]
 z_index = 2
@@ -962,22 +979,8 @@ position = Vector2(0, 114.06)
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=894735774]
 tile_set = SubResource("TileSet_2vyxd")
 
-[node name="Node" type="Node" parent="." unique_id=1279040590 node_paths=PackedStringArray("target_layer")]
+[node name="TerrainGenerator" type="Node" parent="." unique_id=1279040590 node_paths=PackedStringArray("target_layer")]
 script = ExtResource("8_dqmce")
 target_layer = NodePath("..")
 
-[node name="LeftBorder" type="StaticBody2D" parent="." unique_id=74134006]
-position = Vector2(-328, 176)
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBorder" unique_id=956063067]
-position = Vector2(0, -175)
-shape = SubResource("RectangleShape2D_2vyxd")
-
-[node name="RightBorder" type="StaticBody2D" parent="." unique_id=2022702282]
-position = Vector2(336, 176)
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBorder" unique_id=1791817121]
-position = Vector2(0, -175)
-shape = SubResource("RectangleShape2D_2vyxd")
+[connection signal="animation_finished" from="ShakeCamera/GodText/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

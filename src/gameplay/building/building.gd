@@ -5,6 +5,7 @@ class_name Building
 @export var build_cost: float = 200
 @export var progress_label: Label
 @export var brick_layer: TileMapLayer
+@export var finished = false
 
 @export_group("Quota")
 
@@ -44,7 +45,7 @@ func _ready() -> void:
 		timer_label.visible = false
 
 func _process(delta: float) -> void:
-	if !_quota_running and Input.is_action_just_pressed("q"):
+	if !finished and !_quota_running and Input.is_action_just_pressed("q"):
 		$AudioStreamPlayer2D.play()
 		start_quota()
 
@@ -75,11 +76,13 @@ func start_quota() -> void:
 	_update_progress_label()
 
 func build(amount: float) -> void:
-	_build_progress = clamp(_build_progress + amount, 0, build_cost)
-	_update_progress_label()
-	_update_brick_map()
+	if !finished:
+		_build_progress = clamp(_build_progress + amount, 0, build_cost)
+		_update_progress_label()
+		_update_brick_map()
 
-	if _build_progress == build_cost:
+	if !finished and _build_progress == build_cost:
+		finished = true
 		SignalBus.building_finished.emit(self)
 
 	# quota reached while the timer is still running = win
@@ -87,13 +90,14 @@ func build(amount: float) -> void:
 		_finish_quota(true)
 
 func attack(damage: float) -> void:
-	_build_progress = clamp(_build_progress - damage, 0, build_cost)
+	if !finished:
+		_build_progress = clamp(_build_progress - damage, 0, build_cost)
 
-	_update_label()
-	_update_brick_map()
+		_update_label()
+		_update_brick_map()
 
-	if _build_progress == damage:
-		SignalBus.building_destroyed.emit(self)
+		if _build_progress == damage:
+			SignalBus.building_destroyed.emit(self)
 
 func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:
 	if a.y == b.y:
