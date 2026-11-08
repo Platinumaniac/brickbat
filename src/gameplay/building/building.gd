@@ -65,7 +65,7 @@ func start_quota() -> void:
 
 	var current_ratio := _build_progress / build_cost
 	var raw_goal := maxf(quota_min, current_ratio * quota_growth)
-	_quota_goal = clampf(ceilf(raw_goal / 0.05 - 0.0001) * 0.05, 0.0, 1.0)
+	_quota_goal = clampf(ceilf(raw_goal * 20.0 - 0.0001) / 20.0, 0.0, 1.0)
 
 	_time_left = time_limit
 	_quota_running = true
@@ -86,7 +86,7 @@ func build(amount: float) -> void:
 		SignalBus.building_finished.emit(self)
 
 	# quota reached while the timer is still running = win
-	if _quota_running and _build_progress >= build_cost * _quota_goal:
+	if _quota_running and _build_progress >= build_cost * _quota_goal - 0.001:
 		_finish_quota(true)
 
 func attack(damage: float) -> void:
@@ -97,6 +97,7 @@ func attack(damage: float) -> void:
 		_update_brick_map()
 
 		if _build_progress == damage:
+			$DestroyedAudio.play()
 			SignalBus.building_destroyed.emit(self)
 
 func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:

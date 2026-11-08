@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://i7p1m7xlkvwp" path="res://src/gameplay/enemy/ground_enemy/ground_enemy.gd" id="1_2uvku"]
 [ext_resource type="Texture2D" uid="uid://cfy22nxdvbyjg" path="res://assets/enemies/shadow.png" id="2_2uvku"]
+[ext_resource type="AudioStream" uid="uid://b6um0msmjqs07" path="res://audio/EnemyAttack/SFX_CJ26_BB_EnemyAttack_RR1.wav" id="3_jv7jb"]
+[ext_resource type="AudioStream" uid="uid://docx6tqtqoss4" path="res://audio/EnemyAttack/SFX_CJ26_BB_EnemyAttack_RR2.wav" id="4_o0hr0"]
+[ext_resource type="AudioStream" uid="uid://bysrv3oyo4e3q" path="res://audio/EnemyAttack/SFX_CJ26_BB_EnemyAttack_RR3.wav" id="5_lx67u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uvku"]
 radius = 12.0
@@ -63,6 +66,12 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jv7jb"]
+streams_count = 3
+stream_0/stream = ExtResource("3_jv7jb")
+stream_1/stream = ExtResource("4_o0hr0")
+stream_2/stream = ExtResource("5_lx67u")
+
 [sub_resource type="Animation" id="Animation_ftrg8"]
 resource_name = "attack"
 step = 0.1
@@ -92,6 +101,21 @@ tracks/1/keys = {
 "method": &"attack_target"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_jv7jb")
+}],
+"times": PackedFloat32Array(0.3)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_or1x6"]
 resource_name = "death"
@@ -186,3 +210,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingBox" unique_id=677327534]
 shape = SubResource("RectangleShape2D_2vyxd")
 debug_color = Color(0.9609727, 1.6364455e-06, 0.51574105, 0.41960785)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1079726971]

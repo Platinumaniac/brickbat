@@ -26,8 +26,12 @@ func free_all_enemies() -> void:
 	for enemy_spawner in get_tree().current_scene.find_children("*", "EnemySpawner", true, false):
 		enemy_spawner.queue_free()
 		print("1")
+	for dumb_enemy_spawner in get_tree().current_scene.find_children("*", "DumbEnemySpawner", true, false):
+		dumb_enemy_spawner.queue_free()
 	for enemy in get_tree().current_scene.find_children("*", "Enemy", true, false):
 		enemy.queue_free()
+	for dumb_enemy in get_tree().current_scene.find_children("*", "DumbEnemy", true, false):
+		dumb_enemy.queue_free()
 
 func _on_building_finished(building: Building) -> void:
 	if animation_player == null:

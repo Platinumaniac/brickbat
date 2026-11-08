@@ -44,6 +44,7 @@ func _start_game() -> void:
 	SignalBus.quota_finished.connect(_on_quota_finished)
 	SignalBus.enemy_added.connect(_on_enemy_added)
 	SignalBus.dummb_enemy_added.connect(_on_dumb_enemy_added)
+	SignalBus.building_destroyed.connect(_on_building_destroyed)
 	_init_player()
 	_load_stage(_stage_uid)
 
@@ -82,3 +83,10 @@ func _on_enemy_added(enemy: Enemy) -> void:
 
 func _on_dumb_enemy_added(enemy: DumbEnemy) -> void:
 	_entity_root.add_child(enemy)
+
+func _on_building_destroyed(building: Building) -> void:
+	if $AudioStreamPlayer.stream_paused:
+		return
+	$AudioStreamPlayer.stream_paused = true
+	await get_tree().create_timer(20.0).timeout
+	$AudioStreamPlayer.stream_paused = false

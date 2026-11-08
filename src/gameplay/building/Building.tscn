@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://d4c5ko7524l5y" path="res://audio/GodMumble/SFX_CJ26_BB_GodMumble_1.wav" id="3_05mew"]
 [ext_resource type="AudioStream" uid="uid://10tkfm0yj6lq" path="res://audio/GodMumble/SFX_CJ26_BB_GodMumble_2.wav" id="4_mc82b"]
 [ext_resource type="AudioStream" uid="uid://00hefxef8v2x" path="res://audio/GodMumble/SFX_CJ26_BB_GodMumble_3.wav" id="5_h2nn6"]
+[ext_resource type="AudioStream" uid="uid://lgjeqmnjwmk6" path="res://audio/Stings/Sting_BB_BuildingDestroyed_GameOver.wav" id="6_h2nn6"]
 [ext_resource type="TileSet" uid="uid://bnjnygc25nhbt" path="res://src/resources/building_tileset.tres" id="6_mc82b"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g4v7s"]
@@ -47,3 +48,7 @@ stream = SubResource("AudioStreamRandomizer_g4v7s")
 [node name="BrickLayer" type="TileMapLayer" parent="." unique_id=531884584]
 z_index = 1
 tile_set = ExtResource("6_mc82b")
+
+[node name="DestroyedAudio" type="AudioStreamPlayer2D" parent="." unique_id=1208880586]
+stream = ExtResource("6_h2nn6")
+volume_db = 5.0
