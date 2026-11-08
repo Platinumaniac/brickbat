@@ -941,6 +941,7 @@ metadata/_custom_type_script = "uid://cffhngadtopdq"
 
 [node name="LeftBorder" type="StaticBody2D" parent="ShakeCamera" unique_id=74134006]
 position = Vector2(-328, 176)
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/LeftBorder" unique_id=956063067]
@@ -949,6 +950,7 @@ shape = SubResource("RectangleShape2D_2vyxd")
 
 [node name="RightBorder" type="StaticBody2D" parent="ShakeCamera" unique_id=2022702282]
 position = Vector2(336, 176)
+collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/RightBorder" unique_id=1791817121]

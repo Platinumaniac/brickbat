@@ -1,4 +1,4 @@
-extends Enemy
+extends SmartEnemy
 
 @onready var _sprite: Sprite2D = %Sprite2D
 @onready var _animation_tree: AnimationTree = %AnimationTree

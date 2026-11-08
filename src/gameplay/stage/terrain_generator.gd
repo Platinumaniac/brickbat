@@ -217,7 +217,7 @@ func _generate_enemy_spawners(layer: TileMapLayer) -> void:
 	var left_x: int = _origin_cell.x
 	var right_x: int = _origin_cell.x + (_right_chunks + 1) * WIDTH
 
-	_place_spawner(layer, Vector2i(left_x, _origin_cell.y - _left_height), GROUND_ENEMY_SPAWNER_ID)
-	_place_spawner(layer, Vector2i(right_x, _origin_cell.y - _right_height), GROUND_ENEMY_SPAWNER_ID)
+	_place_spawner(layer, Vector2i(left_x + 1, _origin_cell.y - _left_height - 1), GROUND_ENEMY_SPAWNER_ID)
+	_place_spawner(layer, Vector2i(right_x - 1, _origin_cell.y - _right_height - 1), GROUND_ENEMY_SPAWNER_ID)
 	_place_spawner(layer, Vector2i(left_x, -5), FLYER_SPAWNER_ID)
 	_place_spawner(layer, Vector2i(right_x, -5), FLYER_SPAWNER_ID)

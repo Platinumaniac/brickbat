@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cfy22nxdvbyjg" path="res://assets/enemies/shadow.png" id="2_2uvku"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uvku"]
-radius = 14.0
+radius = 12.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2uvku"]
 animation = &"attack"
@@ -148,12 +148,14 @@ _data = {
 &"walk": SubResource("Animation_uffq1")
 }
 
-[node name="Enemy" type="Area2D" unique_id=423329651]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
+size = Vector2(32, 20)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=2129949094]
 collision_layer = 8
-collision_mask = 0
-input_pickable = false
+collision_mask = 5
 script = ExtResource("1_2uvku")
-metadata/_custom_type_script = "uid://dwuc05gkueuty"
+metadata/_custom_type_script = "uid://dy6fxpdhmn2w3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1139800144]
 shape = SubResource("CircleShape2D_2uvku")
@@ -175,3 +177,12 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1303450329]
 libraries/ = SubResource("AnimationLibrary_jv7jb")
+
+[node name="BuildingBox" type="Area2D" parent="." unique_id=461209911]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingBox" unique_id=677327534]
+shape = SubResource("RectangleShape2D_2vyxd")
+debug_color = Color(0.9609727, 1.6364455e-06, 0.51574105, 0.41960785)

@@ -43,6 +43,7 @@ func _start_game() -> void:
 	_title_screen.hide()
 	SignalBus.quota_finished.connect(_on_quota_finished)
 	SignalBus.enemy_added.connect(_on_enemy_added)
+	SignalBus.dummb_enemy_added.connect(_on_dumb_enemy_added)
 	_init_player()
 	_load_stage(_stage_uid)
 
@@ -76,4 +77,8 @@ func _on_quota_finished(won: bool) -> void:
 		pass
 
 func _on_enemy_added(enemy: Enemy) -> void:
+	_entity_root.add_child(enemy)
+
+
+func _on_dumb_enemy_added(enemy: DumbEnemy) -> void:
 	_entity_root.add_child(enemy)

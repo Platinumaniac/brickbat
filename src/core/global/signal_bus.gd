@@ -7,6 +7,7 @@ signal play_clicked
 signal stage_initiated(stage: Stage)
 
 signal enemy_added(enemy: Enemy)
+signal dummb_enemy_added(enemy: DumbEnemy)
 
 ## sent when a building has been built
 signal building_finished(building: Building)
