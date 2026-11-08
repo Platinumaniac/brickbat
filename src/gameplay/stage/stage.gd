@@ -50,7 +50,7 @@ func _input(event: InputEvent) -> void:
 		for preview in get_tree().current_scene.find_children("TrajectoryPreview*", "Line2D", true, false):
 			preview.visible = false
 		get_tree().paused = false
-		$TerrainGenerator.extend_terrain()
+		#$TerrainGenerator.extend_terrain()
 		can_advance = false
 
 func get_building_map() -> Dictionary[Vector2i, Building]:

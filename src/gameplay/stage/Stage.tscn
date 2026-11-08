@@ -947,6 +947,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/LeftBorder" unique_id=956063067]
 position = Vector2(0, -175)
 shape = SubResource("RectangleShape2D_2vyxd")
+disabled = true
 
 [node name="RightBorder" type="StaticBody2D" parent="ShakeCamera" unique_id=2022702282]
 position = Vector2(336, 176)
@@ -956,6 +957,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShakeCamera/RightBorder" unique_id=1791817121]
 position = Vector2(0, -175)
 shape = SubResource("RectangleShape2D_2vyxd")
+disabled = true
 
 [node name="GodText" type="Sprite2D" parent="ShakeCamera" unique_id=1090057717]
 texture = ExtResource("8_t6k4j")

@@ -14,6 +14,15 @@ var _mouse_position: Vector2
 var _is_throwing: bool = false
 var _last_direction: float = 0
 
+const SCREEN_SIZE := Vector2(640, 360)
+
+#half it width just a trial error number
+@export var wrap_margin: float = 4.0
+
+
+var _screen_left: float = -SCREEN_SIZE.x / 2.0
+var _screen_right: float = SCREEN_SIZE.x / 2.0
+
 func _ready() -> void:
 	SignalBus.building_finished.connect(_on_building_finished)
 	SignalBus.building_destroyed.connect(_on_building_destroyed)
@@ -63,6 +72,14 @@ func _physics_process(delta: float) -> void:
 		velocity.y += _gravity * delta * 4
 
 	move_and_slide()
+	_wrap_around_screen()
+
+func _wrap_around_screen() -> void:
+	global_position.x = wrapf(
+		global_position.x,
+		_screen_left - wrap_margin,
+		_screen_right + wrap_margin
+	)
 
 func _throw_brick(velocity: Vector2) -> void:
 	if brick_scene == null:
