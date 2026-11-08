@@ -25,9 +25,6 @@ func set_tileset() -> void:
 func free_all_enemies() -> void:
 	for enemy_spawner in get_tree().current_scene.find_children("*", "EnemySpawner", true, false):
 		enemy_spawner.queue_free()
-		print("1")
-	for dumb_enemy_spawner in get_tree().current_scene.find_children("*", "DumbEnemySpawner", true, false):
-		dumb_enemy_spawner.queue_free()
 	for enemy in get_tree().current_scene.find_children("*", "Enemy", true, false):
 		enemy.queue_free()
 	for dumb_enemy in get_tree().current_scene.find_children("*", "DumbEnemy", true, false):
@@ -48,7 +45,7 @@ func get_player_spawn() -> Vector2:
 	if spawn_marker != null:
 		return spawn_marker.global_position
 	return Vector2.ZERO
-	
+
 func _input(event: InputEvent) -> void:
 	if can_advance and Input.is_action_just_pressed("space"):
 		for preview in get_tree().current_scene.find_children("TrajectoryPreview*", "Line2D", true, false):

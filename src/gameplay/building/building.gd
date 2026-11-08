@@ -29,6 +29,8 @@ class_name Building
 ## remaining time label.
 @export var timer_label: Label
 
+const OUTLINE_TERRAIN_SET: int = 0
+const OUTLINE_TERRAIN: int = 0
 const BRICK_CELLS: Array[Vector2i] = [Vector2i(0,1),Vector2i(1,1),Vector2i(2,1),Vector2i(3,1),Vector2i(4,1)]
 const HALF_BRICK_CELLS: Array[Vector2i] = [Vector2i(0,0),Vector2i(1,0),Vector2i(2,0)]
 
@@ -41,6 +43,8 @@ var _quota_running = false
 var _blink_tween: Tween
 
 func _ready() -> void:
+	_generate_tower()
+
 	if timer_label != null:
 		timer_label.visible = false
 
@@ -106,6 +110,33 @@ func _sort_by_position(a: Vector2i, b: Vector2i) -> bool:
 	else:
 		return a.y < b.y
 
+func _generate_tower() -> void:
+	clear()
+
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var layer: int = 1
+	var height: int =rng.randi_range(5, 9)
+	var last_width: int = 6
+	var cells: Array[Vector2i] = []
+	while layer > -height:
+		var layer_width = randi_range(round(last_width / 1.2), last_width)
+		for i in range(0, randi_range(round(last_width / 1.2), last_width)):
+			if layer == -height +1:
+				if rng.randi_range(0,2) == 1:
+					cells.push_back(Vector2i(i - layer_width / 2, layer))
+				else:
+					continue
+			cells.push_back(Vector2i(i - layer_width / 2, layer))
+
+
+		last_width = layer_width
+		layer -= 1
+
+	set_cells_terrain_connect(cells, OUTLINE_TERRAIN_SET, OUTLINE_TERRAIN)
+
+	var map_rect = get_used_rect()
+	progress_label.position = map_to_local(map_rect.position)
+	progress_label.size = map_to_local(map_rect.size)
 
 func _update_label() -> void:
 	if progress_label != null:
