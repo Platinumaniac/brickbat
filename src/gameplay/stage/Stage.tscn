@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cib26m581p1j0" path="res://src/gameplay/enemy_spawner/FlyerSpawner.tscn" id="3_vdv31"]
 [ext_resource type="Script" uid="uid://cffhngadtopdq" path="res://src/gameplay/stage/camera_2d.gd" id="3_xoyka"]
 [ext_resource type="PackedScene" uid="uid://dyyle1tiitayn" path="res://src/gameplay/building/Building.tscn" id="4_3faw4"]
-[ext_resource type="Texture2D" uid="uid://dyo3uqa8lel2a" path="res://assets/tilesets/tileset0.png" id="5_vsv6w"]
+[ext_resource type="Texture2D" uid="uid://dyo3uqa8lel2a" path="res://assets/tilesets/tileset0_night.png" id="5_vsv6w"]
 [ext_resource type="Script" uid="uid://fo0m5bkokycq" path="res://src/gameplay/stage/terrain_generator.gd" id="8_dqmce"]
+[ext_resource type="Texture2D" uid="uid://chtvhp0iqadwy" path="res://assets/Background/god_text-Sheet.png" id="8_t6k4j"]
+[ext_resource type="Texture2D" uid="uid://dhsqo7ytcsh4r" path="res://assets/Background/cutscene-Sheet.png" id="10_vdv31"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofpdg"]
 texture = ExtResource("1_i3rf1")
@@ -830,6 +832,81 @@ sources/3 = SubResource("TileSetAtlasSource_vdv31")
 sources/1 = SubResource("TileSetScenesCollectionSource_vsv6w")
 sources/4 = SubResource("TileSetAtlasSource_t6k4j")
 
+[sub_resource type="Animation" id="Animation_t6k4j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_a7sk1"]
+resource_name = "WinAnim"
+length = 6.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6, 0.8000001, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 2, 2.2, 2.4, 2.6000001, 2.8000002, 3.0000002, 3.2000003, 3.4, 3.6000001, 3.8000002, 4, 4.2000003, 4.4, 4.6000004, 4.8, 5, 5.2000003, 5.4, 5.6000004, 5.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.6000004, 5.8, 6, 6.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_tileset_day"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0uq0"]
+_data = {
+&"RESET": SubResource("Animation_t6k4j"),
+&"WinAnim": SubResource("Animation_a7sk1")
+}
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_votta"]
 texture = ExtResource("2_votta")
 0:0/0 = 0
@@ -842,12 +919,28 @@ sources/0 = SubResource("TileSetAtlasSource_votta")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2vyxd"]
 size = Vector2(20, 370)
 
-[node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker")]
+[node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker", "animation_player")]
 z_index = 6
 tile_set = SubResource("TileSet_km6bk")
 script = ExtResource("1_osl5s")
 spawn_marker = NodePath("Marker2D")
+animation_player = NodePath("GodText/AnimationPlayer")
 metadata/_custom_type_script = "uid://dmdn7c632ktnw"
+
+[node name="GodText" type="Sprite2D" parent="." unique_id=1090057717]
+texture = ExtResource("8_t6k4j")
+hframes = 3
+vframes = 2
+
+[node name="Background" type="Sprite2D" parent="GodText" unique_id=76517136]
+z_index = -6
+texture = ExtResource("10_vdv31")
+hframes = 6
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GodText" unique_id=1115822020]
+process_mode = 3
+libraries/ = SubResource("AnimationLibrary_q0uq0")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1786558173]
 position = Vector2(0, 144)

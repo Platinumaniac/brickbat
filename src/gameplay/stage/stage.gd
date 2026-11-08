@@ -1,7 +1,26 @@
 extends TileMapLayer
 class_name Stage
 
+const TILESET_DAY = preload("res://assets/tilesets/tileset0_day.png")
+
 @export var spawn_marker: Marker2D
+@export var animation_player: AnimationPlayer
+
+func _ready() -> void:
+	SignalBus.building_finished.connect(_on_building_finished)
+
+func set_tileset_day() -> void:
+	var source := tile_set.get_source(4) as TileSetAtlasSource
+	if source == null:
+		return
+	source.texture = TILESET_DAY
+
+func _on_building_finished(building: Building) -> void:
+	if animation_player == null:
+		return
+	animation_player.play("WinAnim")
+	get_tree().paused = true
+	## win screen, next stage here
 
 func get_player_spawn() -> Vector2:
 	if spawn_marker != null:
