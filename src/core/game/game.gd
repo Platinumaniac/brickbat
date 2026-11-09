@@ -13,11 +13,14 @@ var _stage_uid: String = "uid://o8nun1q5hls4"
 var _player: Player
 var _current_stage: Stage
 
+static var _has_readied: bool = false
+
 func _ready() -> void:
-	if !Debug.bypass_title:
-		SignalBus.play_clicked.connect(_start_game)
-	else:
+	if _has_readied:
 		_start_game()
+		return
+	_has_readied = true
+	SignalBus.play_clicked.connect(_start_game)
 
 func _init_player() -> void:
 	var player_scene = ResourceLoader.load(_player_uid, "PackedScene") as PackedScene

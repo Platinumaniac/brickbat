@@ -31,7 +31,8 @@ func _on_building_finished(building: Building) -> void:
 
 func _on_building_destroyed(building: Building) -> void:
 	get_tree().call_group("shake_camera", "add_trauma", 1.2)
-	_check_level_end()
+	_lose()
+	#_check_level_end()
 
 func _check_level_end() -> void:
 	if _level_over:
@@ -45,6 +46,7 @@ func _check_level_end() -> void:
 	_level_over = true
 	if any_destroyed:
 		_lose()
+		print("a")
 	else:
 		_win()
 
@@ -59,7 +61,6 @@ func _lose() -> void:
 	get_tree().paused = true
 	$Label2.fade_in(0.4)
 	can_restart = true
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match anim_name:
 		"WinAnim":
