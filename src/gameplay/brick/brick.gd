@@ -46,6 +46,7 @@ func _on_body_entered(body: Node2D) -> void:
 	elif body is DumbEnemy:
 		body.attack(power)
 		play_hit_sound("enemy")
+		SignalBus.score_changed.emit(+10)
 		_shatter()
 
 func _on_area_entered(area: Area2D) -> void:

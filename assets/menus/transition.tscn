@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cpx6shbelf45q"]
+
+[ext_resource type="Script" uid="uid://byi00cp3k3gx3" path="res://assets/menus/transition.gd" id="1_wrkk3"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=40925006]
+script = ExtResource("1_wrkk3")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=919809057]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.09239707, 0.09239706, 0.09239706, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=2038100624]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 271.0
+offset_right = 66.0
+offset_bottom = 294.0
+
+[node name="Label2" type="Label" parent="ColorRect" unique_id=797216233]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 296.0
+offset_right = 429.0
+offset_bottom = 319.0
+text = "After a while, frank noticed the god is asleep again..."

@@ -11,9 +11,11 @@ var _enemy_instance: Enemy
 var _navigation_path: PackedVector2Array
 var _target_building: Building
 
-var _time_to_spawn: float = spawn_delay
+var _time_to_spawn: float
 
 func _ready() -> void:
+	spawn_delay /= SignalBus.scale_up(0.08, 40.0)
+	_time_to_spawn = spawn_delay
 	var untyped_instance = enemy_scene.instantiate()
 	if untyped_instance == null:
 		push_error("could not instantiate enemy scene")
@@ -27,11 +29,13 @@ func _ready() -> void:
 	SignalBus.building_path_requested.emit(position)
 
 func _process(delta: float) -> void:
-	if _navigation_path != null:
-		_time_to_spawn = clamp(_time_to_spawn - delta, 0, spawn_delay)
-		if _time_to_spawn == 0:
-			_spawn_enemy()
-			_time_to_spawn = spawn_delay
+	if _navigation_path.is_empty():
+		return
+
+	_time_to_spawn = clamp(_time_to_spawn - delta, 0, spawn_delay)
+	if _time_to_spawn == 0:
+		_spawn_enemy()
+		_time_to_spawn = spawn_delay
 
 func _spawn_enemy() -> void:
 	var instance_duplicate = _enemy_instance.duplicate(DUPLICATE_USE_INSTANTIATION)

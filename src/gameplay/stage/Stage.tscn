@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://chtvhp0iqadwy" path="res://assets/Background/god_text-Sheet.png" id="8_t6k4j"]
 [ext_resource type="Texture2D" uid="uid://dhsqo7ytcsh4r" path="res://assets/Background/cutscene-Sheet.png" id="10_vdv31"]
 [ext_resource type="AudioStream" uid="uid://cqn53j7xpjkq1" path="res://audio/Stings/Sting_CJ26_BB_GodAppear.wav" id="11_q0uq0"]
+[ext_resource type="Script" uid="uid://bgep46pdsrrdd" path="res://src/gameplay/stage/score_label.gd" id="14_3dltr"]
+[ext_resource type="Script" uid="uid://blpaqir4q88u3" path="res://src/gameplay/stage/advance_label.gd" id="15_mamki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofpdg"]
 texture = ExtResource("1_i3rf1")
@@ -935,8 +937,98 @@ texture = ExtResource("2_votta")
 0:1/0 = 0
 0:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q0uq0"]
+texture = ExtResource("5_vsv6w")
+0:0/0 = 0
+1:0/0 = 0
+3:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+22:0/0 = 0
+23:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+20:1/0 = 0
+21:1/0 = 0
+22:1/0 = 0
+23:1/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+21:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+6:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+20:3/0 = 0
+21:3/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+3:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+15:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+21:4/0 = 0
+22:4/0 = 0
+23:4/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_2vyxd"]
-sources/0 = SubResource("TileSetAtlasSource_votta")
+sources/1 = SubResource("TileSetAtlasSource_votta")
+sources/4 = SubResource("TileSetAtlasSource_q0uq0")
 
 [node name="Stage" type="TileMapLayer" unique_id=1070861418 node_paths=PackedStringArray("spawn_marker", "animation_player")]
 process_mode = 3
@@ -945,6 +1037,7 @@ tile_set = SubResource("TileSet_km6bk")
 script = ExtResource("1_osl5s")
 spawn_marker = NodePath("Marker2D")
 animation_player = NodePath("ShakeCamera/GodText/AnimationPlayer")
+building_scene = ExtResource("4_3faw4")
 metadata/_custom_type_script = "uid://dmdn7c632ktnw"
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1786558173]
@@ -1001,8 +1094,38 @@ position = Vector2(0, 114.06)
 [node name="Foreground" type="TileMapLayer" parent="." unique_id=894735774]
 tile_set = SubResource("TileSet_2vyxd")
 
-[node name="TerrainGenerator" type="Node" parent="." unique_id=1279040590 node_paths=PackedStringArray("target_layer")]
+[node name="TerrainGenerator" type="Node" parent="." unique_id=1279040590 node_paths=PackedStringArray("foreground_layer", "target_layer")]
 script = ExtResource("8_dqmce")
+foreground_layer = NodePath("../Foreground")
 target_layer = NodePath("..")
+
+[node name="Label" type="Label" parent="." unique_id=1317556085]
+offset_left = 210.0
+offset_top = -167.0
+offset_right = 250.0
+offset_bottom = -144.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "SCR"
+vertical_alignment = 1
+script = ExtResource("14_3dltr")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=360391082]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -307.0
+offset_top = -167.0
+offset_right = -169.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "SPACE to advance"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_mamki")
 
 [connection signal="animation_finished" from="ShakeCamera/GodText/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

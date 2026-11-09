@@ -5,15 +5,17 @@ class_name DumbEnemySpawner
 @export var enemy_scene: PackedScene
 
 ## the amount of time between each enemy gets spawned
-@export var spawn_delay: float = 5.0
+@export var spawn_delay: float = 10.0
 
 var _enemy_instance: DumbEnemy
 var _navigation_path: PackedVector2Array
 var _target_building: Building
 
-var _time_to_spawn: float = spawn_delay
+var _time_to_spawn: float
 
 func _ready() -> void:
+	spawn_delay /= SignalBus.scale_up(0.08, 40)
+	_time_to_spawn = spawn_delay
 	var untyped_instance = enemy_scene.instantiate()
 	if untyped_instance == null:
 		push_error("could not instantiate enemy scene")

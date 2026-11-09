@@ -7,6 +7,9 @@ class_name Building
 @export var brick_layer: TileMapLayer
 @export var finished = false
 
+var _completion_awarded := false
+var destroyed := false
+
 @export_group("Quota")
 
 ## quota countdown.
@@ -42,16 +45,11 @@ var _time_left: float
 var _quota_running = false
 var _blink_tween: Tween
 
-func _ready() -> void:
-	_generate_tower()
-
-	if timer_label != null:
-		timer_label.visible = false
 
 func _process(delta: float) -> void:
-	if !finished and !_quota_running and Input.is_action_just_pressed("q"):
-		$AudioStreamPlayer2D.play()
-		start_quota()
+	#if !finished and !_quota_running and Input.is_action_just_pressed("q"):
+		#$AudioStreamPlayer2D.play()
+		#start_quota()
 
 	if not _quota_running:
 		return
@@ -79,28 +77,51 @@ func start_quota() -> void:
 	_update_timer_label()
 	_update_progress_label()
 
-func build(amount: float) -> void:
-	if !finished:
-		_build_progress = clamp(_build_progress + amount, 0, build_cost)
-		_update_progress_label()
-		_update_brick_map()
+func _ready() -> void:
+	$AudioStreamPlayer2D.play()
+	build_cost *= SignalBus.scale_up(0.2, 3.0)
+	time_limit /= SignalBus.scale_up(0.08, 2.0)
+	_generate_tower()
+	if timer_label != null:
+		timer_label.visible = false
 
-	if !finished and _build_progress == build_cost:
+func build(amount: float) -> void:
+	if finished or destroyed:
+		return
+	_build_progress = clamp(_build_progress + amount, 0, build_cost)
+	_update_progress_label()
+	_update_brick_map()
+	SignalBus.score_changed.emit(10)
+
+	if _build_progress >= build_cost:
 		finished = true
+		if not _completion_awarded:
+			_completion_awarded = true
+			SignalBus.score_changed.emit(100)
 		SignalBus.building_finished.emit(self)
 
-	# quota reached while the timer is still running = win
 	if _quota_running and _build_progress >= build_cost * _quota_goal - 0.001:
 		_finish_quota(true)
 
 func attack(damage: float) -> void:
-	if !finished:
-		_build_progress = clamp(_build_progress - damage, 0, build_cost)
+	if destroyed:
+		return
+	if finished and SignalBus.tower_count() <= 1:
+		return
 
-		_update_label()
-		_update_brick_map()
+	var had_progress := _build_progress > 0.0
+	_build_progress = clamp(_build_progress - damage, 0, build_cost)
+	if finished and _build_progress < build_cost:
+		finished = false # damaged, can be rebuilt
 
-		if _build_progress == damage:
+	_update_progress_label()
+	_update_brick_map()
+
+	if had_progress:
+		SignalBus.score_changed.emit(-10)
+		if _build_progress <= 0.0:
+			destroyed = true
+			_quota_running = false
 			$DestroyedAudio.play()
 			SignalBus.building_destroyed.emit(self)
 
@@ -115,7 +136,8 @@ func _generate_tower() -> void:
 
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	var layer: int = 1
-	var height: int =rng.randi_range(5, 9)
+	var bonus := mini(floori((SignalBus.level - 1) / 2.0), 4)
+	var height: int = rng.randi_range(5 + bonus, 12 + bonus)
 	var last_width: int = 6
 	var cells: Array[Vector2i] = []
 	while layer > -height:
@@ -212,6 +234,8 @@ func _update_brick_map() -> void:
 			brick_layer.set_cell(cell)
 			bricks_to_remove -= 1
 		brick_remove_index += 1
+
+
 
 
 

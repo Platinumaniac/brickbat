@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ds424mi8d3m1k" path="res://src/core/game/game.gd" id="1_cky5y"]
 [ext_resource type="Script" uid="uid://db226hv2volbb" path="res://src/core/systems/navigation.gd" id="2_22ngx"]
-[ext_resource type="AudioStream" uid="uid://cg4dlilkxylh" path="res://audio/Music/BB_Construction Jam 2026_Main Theme_V1.mp3" id="3_jfb2m"]
+[ext_resource type="AudioStream" uid="uid://bsdti7ndmd56n" path="res://audio/Music/BB_Construction Jam 2026_Menu Theme_Demo V1.mp3" id="3_fahfd"]
 [ext_resource type="PackedScene" uid="uid://klg7bg38yl32" path="res://src/ui/TitleScreen.tscn" id="4_fahfd"]
 
 [node name="Game" type="Node" unique_id=1707179465]
@@ -24,7 +24,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1316681699]
-stream = ExtResource("3_jfb2m")
+stream = ExtResource("3_fahfd")
 autoplay = true
 parameters/looping = true
 
